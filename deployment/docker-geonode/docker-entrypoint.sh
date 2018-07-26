@@ -4,7 +4,7 @@ set -e
 
 echo "Number of arguments $#"
 
-/usr/local/bin/invoke update >> /usr/src/app/invoke.log
+/usr/local/bin/invoke update
 
 source $HOME/.override_env
 
@@ -14,15 +14,15 @@ echo SITEURL=$SITEURL
 echo ALLOWED_HOSTS=$ALLOWED_HOSTS
 echo GEOSERVER_PUBLIC_LOCATION=$GEOSERVER_PUBLIC_LOCATION
 
-/usr/local/bin/invoke waitfordbs >> /usr/src/app/invoke.log
+/usr/local/bin/invoke waitfordbs
 
 echo "waitfordbs task done"
 
-/usr/local/bin/invoke migrations >> /usr/src/app/invoke.log
+/usr/local/bin/invoke migrations
 echo "migrations task done"
-/usr/local/bin/invoke prepare >> /usr/src/app/invoke.log
+/usr/local/bin/invoke prepare
 echo "prepare task done"
-/usr/local/bin/invoke fixtures >> /usr/src/app/invoke.log
+/usr/local/bin/invoke fixtures
 echo "fixture task done"
 
 python manage.py collectstatic --noinput -i geoexplorer >> /usr/src/app/invoke.log
