@@ -1,6 +1,7 @@
 # coding=utf-8
 from __future__ import absolute_import
 
+import importlib
 import ast
 import sys
 import os
@@ -34,6 +35,35 @@ try:
         update_settings(this_settings)
 except ImportError:
     pass
+
+# Custom theme settings
+USE_THEME_APP = ast.literal_eval(
+    os.environ.get('USE_THEME_APP', 'False'))
+
+if USE_THEME_APP:
+
+    THEME_APP_NAME = os.environ.get('THEME_APP_NAME', None)
+
+    INSTALLED_APPS = list(INSTALLED_APPS)
+    INSTALLED_APPS.append(THEME_APP_NAME)
+
+    # Prioritize custom translations
+    LOCALE_PATHS = list(LOCALE_PATHS)
+    LOCALE_PATHS.insert(
+        0, '/usr/src/custom_theme/{app_name}/locale'.format(
+            app_name=THEME_APP_NAME))
+
+    # Prioritize custom theme
+    template_dirs = list(TEMPLATES[0]['DIRS'])
+    template_dirs.insert(
+        0, '/usr/src/custom_theme/{app_name}/templates'.format(
+            app_name=THEME_APP_NAME))
+
+    TEMPLATES[0]['DIRS'] = template_dirs
+
+    # Import app settings
+    importlib.import_module(
+        '{app_name}.settings'.format(app_name=THEME_APP_NAME))
 
 # Loggers
 if DEBUG:
