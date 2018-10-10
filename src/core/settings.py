@@ -78,6 +78,7 @@ if DEBUG:
         "level": "DEBUG",
     }
 
+    INSTALLED_APPS = list(INSTALLED_APPS)
     INSTALLED_APPS = ['test_without_migrations'] + INSTALLED_APPS
 
     # Specify test database name
