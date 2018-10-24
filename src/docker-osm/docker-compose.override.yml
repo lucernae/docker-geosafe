@@ -1,0 +1,54 @@
+
+version: '2.1'
+
+#volumes:
+#  osm-postgis-data:
+#    driver: local
+#    driver_opts:
+#      o: bind
+#      type: none
+#      device: ./postgis
+#  import_done:
+#    driver: local
+#    driver_opts:
+#      o: bind
+#      type: none
+#      device: ./import_done
+#  import_queue:
+#    driver: local
+#    driver_opts:
+#      o: bind
+#      type: none
+#      device: ./import_queue
+#  cache:
+#    driver: local
+#    driver_opts:
+#      o: bind
+#      type: none
+#      device: ./cache
+#  backup:
+#    driver: local
+#    driver_opts:
+#      o: bind
+#      type: none
+#      device: ./backup
+#  qgis-server-qgis-layer-data:
+#    driver: local
+#    driver_opts:
+#      o: bind
+#      type: none
+#      device: ./qgis-server-layer
+#  btsync-data:
+#    driver: local
+#    driver_opts:
+#      o: bind
+#      type: none
+#      device: ./btsync
+
+services:
+  db:
+    environment:
+      ALLOW_IP_RANGE: 0.0.0.0/0
+    ports:
+      - 35432:5432
+
