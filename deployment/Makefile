@@ -87,6 +87,9 @@ stop-inasafe-headless:
 shell:
 	@docker-compose exec django /bin/bash
 
+geosafe-celery-shell:
+	@docker-compose exec celery /bin/bash
+
 db-shell:
 	@docker-compose exec db /bin/bash
 

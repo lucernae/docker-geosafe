@@ -65,6 +65,7 @@ CELERY_DEFAULT_ROUTING_KEY = "default"
 CELERY_CREATE_MISSING_QUEUES = True
 CELERYD_CONCURRENCY = 1
 CELERYD_PREFETCH_MULTIPLIER = 1
+CELERYD_POOL_RESTARTS = True
 
 # Celery config
 CELERY_TASK_SERIALIZER = 'pickle'
@@ -87,6 +88,10 @@ CELERYBEAT_SCHEDULE = {
     'clean-impact-nightly': {
         'task': 'geosafe.tasks.analysis.clean_impact_result',
         'schedule': crontab(hour='0', minute='0')
+    },
+    'check-analysis-tasks': {
+        'task': 'geosafe.tasks.analysis.check_tasks',
+        'schedule': crontab(minute='0')
     }
 }
 
